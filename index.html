@@ -2,14 +2,16 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>코인 계산기 - CoinBanana | 평단, 손익, 수수료, 김프, 펀딩비까지 15종 지원</title>
-    <meta name="naver-site-verification" content="4d960f8998cb4db9e4f3fd59d6e0135da6660e35" />
-    <meta name="google-site-verification" content="2Th243ANJbx4Dz1reie17FFPfa0lxWmhkFSRbYEmr_I" />
     <meta name="description" content="암호화폐 투자자를 위한 올인원 코인 계산기. 물타기, 손익 계산, 수수료 비교, 김프 계산기 등 총 15종 계산기를 무료로 제공합니다.">
     <meta name="keywords" content="코인 계산기, 평단 계산기, 수익률 계산기, 손익 계산기, 암호화폐 계산기, 청산가 계산기, 펀딩비 계산기, 김프 계산기, CoinBanana, 코인바나나, 거래소 수수료 계산기">
     <meta name="author" content="CoinBanana">
     <meta name="robots" content="index, follow">
+    
+    <!-- 사이트 검증 -->
+    <meta name="naver-site-verification" content="4d960f8998cb4db9e4f3fd59d6e0135da6660e35" />
+    <meta name="google-site-verification" content="2Th243ANJbx4Dz1reie17FFPfa0lxWmhkFSRbYEmr_I" />
     
     <!-- OG 태그 -->
     <meta property="og:title" content="코인 계산기 - CoinBanana">
@@ -91,6 +93,50 @@
         .hover-scale:hover {
             transform: scale(1.02);
         }
+        
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .text-4xl {
+                font-size: 2rem;
+            }
+            .text-xl {
+                font-size: 1.125rem;
+            }
+            .grid-cols-3 {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+            .grid-cols-2 {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+            .p-6 {
+                padding: 1rem;
+            }
+            .px-6 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .py-3 {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+            .text-2xl {
+                font-size: 1.5rem;
+            }
+            input, select {
+                font-size: 16px; /* iOS 줌 방지 */
+            }
+        }
+        
+        /* 터치 친화적 버튼 */
+        .touch-friendly {
+            min-height: 44px;
+            min-width: 44px;
+            padding: 12px 16px;
+        }
         .result-box {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -117,8 +163,13 @@
 <body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
     <div id="app">
         <!-- Header -->
-        <header class="crypto-gradient text-white py-8">
+        <header class="crypto-gradient text-white py-8 relative">
             <div class="container mx-auto px-4 text-center">
+                <!-- 테마 토글 버튼 -->
+                <button id="theme-toggle" class="absolute top-4 right-4 p-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors touch-friendly">
+                    <i id="theme-icon" class="fas fa-moon text-white"></i>
+                </button>
+                
                 <h1 class="text-4xl font-bold mb-2">
                     <i class="fas fa-coins mr-3"></i>CoinBanana
                 </h1>
@@ -139,7 +190,7 @@
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
                     <div class="flex items-center justify-between mb-6">
                         <h2 id="calculator-title" class="text-2xl font-bold text-gray-900 dark:text-white"></h2>
-                        <button id="back-btn" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
+                        <button id="back-btn" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg touch-friendly">
                             <i class="fas fa-arrow-left mr-2"></i>돌아가기
                         </button>
                     </div>
@@ -147,7 +198,7 @@
                     <form id="calc-form" class="space-y-4">
                         <div id="form-fields"></div>
                         
-                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors touch-friendly">
                             <i class="fas fa-calculator mr-2"></i>계산하기
                         </button>
                     </form>
@@ -175,7 +226,7 @@
                             고수익 트레이더들이 선택한 할인 방식, 지금 바로 확인하세요.
                         </p>
                         <a href="https://cobana.netlify.app/" target="_blank" rel="noopener noreferrer"
-                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg touch-friendly">
                             <i class="fas fa-external-link-alt mr-2"></i>
                             공식 파트너 할인 혜택 받기
                         </a>
@@ -369,14 +420,14 @@
                         { value: 'binance', label: 'Binance Smart Chain' },
                         { value: 'polygon', label: 'Polygon' },
                         { value: 'avalanche', label: 'Avalanche' },
-                        { value: 'arbitrum', label: 'Arbitrum' }
+                        { value: 'arbitrium', label: 'Arbitrium' }
                     ], required: true },
                     { name: 'toChain', label: '도착 체인', type: 'select', options: [
                         { value: 'ethereum', label: 'Ethereum' },
                         { value: 'binance', label: 'Binance Smart Chain' },
                         { value: 'polygon', label: 'Polygon' },
                         { value: 'avalanche', label: 'Avalanche' },
-                        { value: 'arbitrum', label: 'Arbitrum' }
+                        { value: 'arbitrium', label: 'Arbitrium' }
                     ], required: true },
                     { name: 'bridgeFee', label: '브릿지 수수료율 (%)', type: 'percentage', placeholder: '0.1', required: true }
                 ]
@@ -448,135 +499,232 @@
         document.addEventListener('DOMContentLoaded', function() {
             renderCalculatorList();
             setupEventListeners();
+            setupHistoryManagement();
+            initializeTheme();
+        });
+
+        // 테마 초기화
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('theme-icon');
             
-            // 다크 모드 감지
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            if (savedTheme === 'dark') {
                 isDarkMode = true;
                 document.documentElement.classList.add('dark');
+                themeIcon.className = 'fas fa-sun text-white';
+            } else {
+                isDarkMode = false;
+                document.documentElement.classList.remove('dark');
+                themeIcon.className = 'fas fa-moon text-white';
+                localStorage.setItem('theme', 'light'); // 기본값을 라이트로 설정
             }
-        });
+        }
+
+        // 히스토리 관리 설정
+        function setupHistoryManagement() {
+            // 페이지 로드 시 초기 상태 설정
+            if (!window.history.state) {
+                window.history.replaceState({ page: 'home' }, '', window.location.href);
+            }
+
+            // 뒤로가기 버튼 처리
+            window.addEventListener('popstate', function(event) {
+                event.preventDefault();
+                if (event.state) {
+                    if (event.state.page === 'home') {
+                        showCalculatorList();
+                    } else if (event.state.page === 'calculator' && event.state.calculatorId) {
+                        // 특정 계산기로 돌아가기
+                        const calculator = calculators.find(c => c.id === event.state.calculatorId);
+                        if (calculator) {
+                            showCalculatorFromHistory(calculator);
+                        } else {
+                            showCalculatorList();
+                        }
+                    }
+                } else {
+                    showCalculatorList();
+                }
+            });
+        }
+
+        // 이벤트 리스너 설정
+        function setupEventListeners() {
+            // 테마 토글
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+            
+            // 뒤로가기 버튼
+            document.getElementById('back-btn').addEventListener('click', function() {
+                window.history.back();
+            });
+            
+            // 폼 제출
+            document.getElementById('calc-form').addEventListener('submit', handleFormSubmit);
+        }
+
+        // 테마 토글
+        function toggleTheme() {
+            const themeIcon = document.getElementById('theme-icon');
+            isDarkMode = !isDarkMode;
+            
+            if (isDarkMode) {  
+                document.documentElement.classList.add('dark');
+                themeIcon.className = 'fas fa-sun text-white';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeIcon.className = 'fas fa-moon text-white';
+                localStorage.setItem('theme', 'light');
+            }
+        }
 
         // 계산기 목록 렌더링
         function renderCalculatorList() {
             const container = document.getElementById('calculator-list');
-            container.innerHTML = '';
-
-            calculators.forEach((calc, index) => {
-                const card = document.createElement('div');
-                card.className = 'crypto-card hover-scale cursor-pointer p-6 rounded-lg transition-all duration-300';
-                card.innerHTML = `
-                    <div class="text-center">
-                        <i class="${calc.icon} text-3xl crypto-icon mb-4"></i>
-                        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">${calc.title}</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">${calc.description}</p>
-                        <div class="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">
-                            ${getCategoryName(calc.category)}
+            
+            let html = '';
+            calculators.forEach((calculator, index) => {
+                const categoryColors = {
+                    'trading': 'from-blue-500 to-blue-600',
+                    'investment': 'from-green-500 to-green-600',
+                    'defi': 'from-purple-500 to-purple-600',
+                    'mining': 'from-orange-500 to-orange-600'
+                };
+                
+                html += `
+                    <div class="crypto-card hover-scale cursor-pointer rounded-lg p-6 text-white bg-gradient-to-br ${categoryColors[calculator.category]}" 
+                         onclick="selectCalculator('${calculator.id}')">
+                        <div class="flex items-center mb-4">
+                            <i class="${calculator.icon} text-2xl mr-3"></i>
+                            <h3 class="text-lg font-semibold">${calculator.title}</h3>
                         </div>
+                        <p class="text-sm opacity-90">${calculator.description}</p>
                     </div>
                 `;
-                card.addEventListener('click', () => showCalculator(calc));
-                container.appendChild(card);
             });
+            
+            container.innerHTML = html;
         }
 
-        // 카테고리 한글명 반환
-        function getCategoryName(category) {
-            const names = {
-                'trading': '거래',
-                'investment': '투자',
-                'defi': 'DeFi',
-                'mining': '마이닝'
-            };
-            return names[category] || category;
-        }
-
-        // 계산기 표시
-        function showCalculator(calculator) {
+        // 계산기 선택
+        function selectCalculator(calculatorId) {
+            const calculator = calculators.find(c => c.id === calculatorId);
+            if (!calculator) return;
+            
             currentCalculator = calculator;
+            
+            // 히스토리에 상태 추가
+            window.history.pushState({ page: 'calculator', calculatorId: calculator.id }, '', `#${calculator.id}`);
+            
+            showCalculatorForm(calculator);
+        }
+
+        // 히스토리에서 계산기 표시 (뒤로가기용)
+        function showCalculatorFromHistory(calculator) {
+            currentCalculator = calculator;
+            showCalculatorForm(calculator);
+        }
+
+        // 계산기 폼 표시
+        function showCalculatorForm(calculator) {
+            // 페이지 상단으로 스크롤
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
             document.getElementById('calculator-list').classList.add('hidden');
             document.getElementById('calculator-form').classList.remove('hidden');
             document.getElementById('calculator-title').textContent = calculator.title;
             
             renderFormFields(calculator.fields);
+            
+            // 결과 영역 숨기기
             document.getElementById('result-area').classList.add('hidden');
         }
 
-        // 폼 필드 렌더링
-        function renderFormFields(fields) {
-            const container = document.getElementById('form-fields');
-            container.innerHTML = '';
-
-            fields.forEach(field => {
-                const fieldDiv = document.createElement('div');
-                fieldDiv.className = 'mb-4';
-
-                let fieldHTML = `<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">${field.label}</label>`;
-
-                if (field.type === 'select') {
-                    fieldHTML += `<select name="${field.name}" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" ${field.required ? 'required' : ''}>`;
-                    fieldHTML += `<option value="">선택하세요</option>`;
-                    field.options.forEach(option => {
-                        fieldHTML += `<option value="${option.value}">${option.label}</option>`;
-                    });
-                    fieldHTML += `</select>`;
-                } else {
-                    const inputType = field.type === 'percentage' ? 'number' : field.type;
-                    fieldHTML += `<input type="${inputType}" name="${field.name}" placeholder="${field.placeholder}" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" ${field.required ? 'required' : ''}>`;
-                }
-
-                // 레버리지 직접 입력 필드 숨기기
-                if (field.name === 'customLeverage') {
-                    fieldHTML = `<div id="custom-leverage-field" class="hidden">${fieldHTML}</div>`;
-                }
-
-                fieldDiv.innerHTML = fieldHTML;
-                container.appendChild(fieldDiv);
-            });
-
-            // 레버리지 선택 이벤트 처리
-            const leverageSelect = container.querySelector('select[name="leverage"]');
-            if (leverageSelect) {
-                leverageSelect.addEventListener('change', function() {
-                    const customField = document.getElementById('custom-leverage-field');
-                    if (this.value === 'custom') {
-                        customField.classList.remove('hidden');
-                    } else {
-                        customField.classList.add('hidden');
-                    }
-                });
-            }
-        }
-
-        // 이벤트 리스너 설정
-        function setupEventListeners() {
-            document.getElementById('back-btn').addEventListener('click', showCalculatorList);
-            document.getElementById('calc-form').addEventListener('submit', handleFormSubmit);
-        }
-
-        // 계산기 목록으로 돌아가기
+        // 계산기 목록 표시
         function showCalculatorList() {
             document.getElementById('calculator-form').classList.add('hidden');
             document.getElementById('calculator-list').classList.remove('hidden');
             currentCalculator = null;
         }
 
+        // 폼 필드 렌더링
+        function renderFormFields(fields) {
+            const container = document.getElementById('form-fields');
+            
+            let html = '';
+            fields.forEach(field => {
+                if (field.name === 'customLeverage') {
+                    // 커스텀 레버리지 필드는 조건부로 표시
+                    html += `
+                        <div id="custom-leverage-field" class="hidden">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">${field.label}</label>
+                            <input type="number" name="${field.name}" placeholder="${field.placeholder}" 
+                                   class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
+                        </div>
+                    `;
+                } else if (field.type === 'select') {
+                    html += `
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">${field.label}</label>
+                            <select name="${field.name}" ${field.required ? 'required' : ''} 
+                                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                                    ${field.name === 'leverage' ? 'onchange="toggleCustomLeverage(this.value)"' : ''}>
+                                <option value="">선택해주세요</option>
+                                ${field.options.map(option => `<option value="${option.value}">${option.label}</option>`).join('')}
+                            </select>
+                        </div>
+                    `;
+                } else {
+                    const inputType = field.type === 'percentage' ? 'number' : field.type;
+                    html += `
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">${field.label}</label>
+                            <input type="${inputType}" name="${field.name}" placeholder="${field.placeholder}" 
+                                   ${field.required ? 'required' : ''} step="any"
+                                   class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
+                        </div>
+                    `;
+                }
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // 커스텀 레버리지 필드 토글
+        function toggleCustomLeverage(value) {
+            const customField = document.getElementById('custom-leverage-field');
+            if (value === 'custom') {
+                customField.classList.remove('hidden');
+                customField.querySelector('input').required = true;
+            } else {
+                customField.classList.add('hidden');
+                customField.querySelector('input').required = false;
+            }
+        }
+
         // 폼 제출 처리
         async function handleFormSubmit(e) {
             e.preventDefault();
             
+            if (!currentCalculator) return;
+            
             const formData = new FormData(e.target);
             const data = {};
             
-            for (let [key, value] of formData.entries()) {
+            // 폼 데이터 수집
+            for (let [key, value] = formData.entries()) {
                 data[key] = value;
             }
-
+            
             // 로딩 상태 표시
             const submitBtn = e.target.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>계산 중...';
             submitBtn.disabled = true;
-
+            
             try {
                 const result = await calculateResult(currentCalculator.id, data);
                 displayResult(result);
@@ -589,9 +737,8 @@
             }
         }
 
-        // 계산 실행
+        // 계산 결과 계산
         async function calculateResult(calculatorId, data) {
-            // 간단한 계산 로직 (실제로는 더 복잡한 계산이 필요)
             switch (calculatorId) {
                 case 'pnl':
                     return calculatePnL(data);
@@ -606,7 +753,7 @@
                 case 'dca':
                     return calculateDCA(data);
                 case 'liquidation':
-                    return calculateLiquidation(data);
+                    return calculateLiquidationPrice(data);
                 case 'position-size':
                     return calculatePositionSize(data);
                 case 'expected-return':
@@ -632,8 +779,10 @@
             const exitPrice = parseFloat(data.exitPrice);
             const quantity = parseFloat(data.quantity);
             
-            const pnl = (exitPrice - entryPrice) * quantity;
-            const pnlPercentage = ((exitPrice - entryPrice) / entryPrice) * 100;
+            const totalEntry = entryPrice * quantity;
+            const totalExit = exitPrice * quantity;
+            const pnl = totalExit - totalEntry;
+            const pnlPercent = (pnl / totalEntry) * 100;
             
             return {
                 main: {
@@ -643,14 +792,15 @@
                     isProfit: pnl > 0
                 },
                 details: [
-                    { title: '수익률', value: pnlPercentage.toFixed(2), unit: '%' },
-                    { title: '매수 총액', value: (entryPrice * quantity).toLocaleString(), unit: '원' },
-                    { title: '매도 총액', value: (exitPrice * quantity).toLocaleString(), unit: '원' }
+                    { title: '매수 총액', value: totalEntry.toLocaleString(), unit: '원' },
+                    { title: '매도 총액', value: totalExit.toLocaleString(), unit: '원' },
+                    { title: '수익률', value: pnlPercent.toFixed(2), unit: '%' },
+                    { title: '수량', value: quantity.toLocaleString(), unit: '개' }
                 ]
             };
         }
 
-        // 평단가 계산
+        // 평단가 계산 (물타기)
         function calculateAveragingDown(data) {
             const initialPrice = parseFloat(data.initialPrice);
             const initialQuantity = parseFloat(data.initialQuantity);
@@ -663,14 +813,15 @@
             
             return {
                 main: {
-                    title: '평단가',
+                    title: '평균 단가',
                     value: averagePrice.toLocaleString(),
                     unit: '원'
                 },
                 details: [
                     { title: '총 투자금액', value: totalCost.toLocaleString(), unit: '원' },
                     { title: '총 보유수량', value: totalQuantity.toLocaleString(), unit: '개' },
-                    { title: '평단가 변화', value: (averagePrice - initialPrice).toLocaleString(), unit: '원' }
+                    { title: '최초 매수가', value: initialPrice.toLocaleString(), unit: '원' },
+                    { title: '추가 매수가', value: additionalPrice.toLocaleString(), unit: '원' }
                 ]
             };
         }
@@ -681,6 +832,21 @@
             const fromCurrency = data.fromCurrency;
             const toCurrency = data.toCurrency;
             
+            if (fromCurrency === toCurrency) {
+                return {
+                    main: {
+                        title: '환전 결과',
+                        value: amount.toLocaleString(),
+                        unit: getCurrencyUnit(toCurrency)
+                    },
+                    details: [
+                        { title: '환율', value: '1.0000', unit: `${getCurrencyUnit(toCurrency)}/${getCurrencyUnit(fromCurrency)}` },
+                        { title: '원금', value: amount.toLocaleString(), unit: getCurrencyUnit(fromCurrency) },
+                        { title: '마지막 업데이트', value: new Date().toLocaleString(), unit: '' }
+                    ]
+                };
+            }
+            
             try {
                 const rate = await fetchRealTimeRate(fromCurrency, toCurrency);
                 const convertedAmount = amount * rate;
@@ -688,35 +854,96 @@
                 return {
                     main: {
                         title: '환전 결과',
-                        value: convertedAmount.toLocaleString(),
+                        value: convertedAmount.toLocaleString(undefined, { maximumFractionDigits: 8 }),
                         unit: getCurrencyUnit(toCurrency)
                     },
                     details: [
-                        { title: '환율', value: rate.toLocaleString(), unit: `${getCurrencyUnit(toCurrency)}/${getCurrencyUnit(fromCurrency)}` },
+                        { title: '환율', value: rate.toLocaleString(undefined, { maximumFractionDigits: 8 }), unit: `${getCurrencyUnit(toCurrency)}/${getCurrencyUnit(fromCurrency)}` },
                         { title: '원금', value: amount.toLocaleString(), unit: getCurrencyUnit(fromCurrency) },
                         { title: '마지막 업데이트', value: new Date().toLocaleString(), unit: '' }
                     ]
                 };
             } catch (error) {
-                throw new Error('환율 정보를 가져오는데 실패했습니다.');
+                throw new Error(error.message || '환율 정보를 가져오는데 실패했습니다.');
             }
         }
 
-        // 실시간 환율 가져오기
+        // 실시간 환율 가져오기 (GitHub Pages 호환)
         async function fetchRealTimeRate(fromCurrency, toCurrency) {
-            // 암호화폐 목록
-            const cryptoCurrencies = ['bitcoin', 'ethereum', 'binancecoin'];
-            
-            if (cryptoCurrencies.includes(fromCurrency) || cryptoCurrencies.includes(toCurrency)) {
-                // CoinGecko API 사용
-                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${fromCurrency}&vs_currencies=${toCurrency}`);
-                const data = await response.json();
-                return data[fromCurrency][toCurrency];
-            } else {
-                // ExchangeRate-API 사용
-                const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
-                const data = await response.json();
-                return data.rates[toCurrency];
+            try {
+                const cryptoCurrencies = ['bitcoin', 'ethereum', 'binancecoin'];
+                
+                // 암호화폐가 포함된 경우 CoinGecko API 사용
+                if (cryptoCurrencies.includes(fromCurrency) || cryptoCurrencies.includes(toCurrency)) {
+                    let apiUrl;
+                    
+                    if (cryptoCurrencies.includes(fromCurrency) && !cryptoCurrencies.includes(toCurrency)) {
+                        // 암호화폐 → 법정화폐
+                        apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${fromCurrency}&vs_currencies=${toCurrency.toLowerCase()}`;
+                    } else if (!cryptoCurrencies.includes(fromCurrency) && cryptoCurrencies.includes(toCurrency)) {
+                        // 법정화폐 → 암호화폐
+                        apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${toCurrency}&vs_currencies=${fromCurrency.toLowerCase()}`;
+                    } else {
+                        // 암호화폐 → 암호화폐
+                        apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${fromCurrency},${toCurrency}&vs_currencies=usd`;
+                    }
+                    
+                    const response = await fetch(apiUrl, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`API 응답 오류: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (cryptoCurrencies.includes(fromCurrency) && !cryptoCurrencies.includes(toCurrency)) {
+                        return data[fromCurrency][toCurrency.toLowerCase()];
+                    } else if (!cryptoCurrencies.includes(fromCurrency) && cryptoCurrencies.includes(toCurrency)) {
+                        return 1 / data[toCurrency][fromCurrency.toLowerCase()];
+                    } else {
+                        return data[fromCurrency].usd / data[toCurrency].usd;
+                    }
+                } else {
+                    // 법정화폐 간 환율 - ExchangeRate API 사용
+                    const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        // 대체 API 사용
+                        const fallbackResponse = await fetch(`https://open.er-api.com/v6/latest/${fromCurrency}`);
+                        if (!fallbackResponse.ok) {
+                            throw new Error('환율 API에 연결할 수 없습니다');
+                        }
+                        const fallbackData = await fallbackResponse.json();
+                        if (!fallbackData.rates[toCurrency]) {
+                            throw new Error('지원하지 않는 통화입니다');
+                        }
+                        return fallbackData.rates[toCurrency];
+                    }
+                    
+                    const data = await response.json();
+                    if (!data.rates[toCurrency]) {
+                        throw new Error('지원하지 않는 통화입니다');
+                    }
+                    return data.rates[toCurrency];
+                }
+            } catch (error) {
+                console.error('환율 API 오류:', error);
+                
+                // 네트워크 오류나 API 오류 시 기본값 반환
+                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                    throw new Error('인터넷 연결을 확인해주세요');
+                }
+                throw new Error(error.message || '환율 정보를 가져올 수 없습니다');
             }
         }
 
@@ -733,7 +960,7 @@
             return units[currency] || currency;
         }
 
-        // 복리 계산
+        // 복리 이자 계산
         function calculateCompoundInterest(data) {
             const principal = parseFloat(data.principal);
             const rate = parseFloat(data.rate) / 100;
@@ -746,13 +973,14 @@
             return {
                 main: {
                     title: '최종 금액',
-                    value: amount.toLocaleString(),
+                    value: Math.round(amount).toLocaleString(),
                     unit: '원'
                 },
                 details: [
                     { title: '원금', value: principal.toLocaleString(), unit: '원' },
-                    { title: '복리 이자', value: interest.toLocaleString(), unit: '원' },
-                    { title: '수익률', value: ((interest / principal) * 100).toFixed(2), unit: '%' }
+                    { title: '복리 이자', value: Math.round(interest).toLocaleString(), unit: '원' },
+                    { title: '총 수익률', value: ((interest / principal) * 100).toFixed(2), unit: '%' },
+                    { title: '연평균 수익률', value: rate * 100, unit: '%' }
                 ]
             };
         }
@@ -761,6 +989,8 @@
         function calculateExchangeFee(data) {
             const tradeAmount = parseFloat(data.tradeAmount);
             const feeRate = parseFloat(data.feeRate) / 100;
+            const tradeType = data.tradeType;
+            
             const fee = tradeAmount * feeRate;
             const netAmount = tradeAmount - fee;
             
@@ -772,8 +1002,9 @@
                 },
                 details: [
                     { title: '거래 금액', value: tradeAmount.toLocaleString(), unit: '원' },
+                    { title: '실제 받는 금액', value: netAmount.toLocaleString(), unit: '원' },
                     { title: '수수료율', value: data.feeRate, unit: '%' },
-                    { title: '실제 거래 금액', value: netAmount.toLocaleString(), unit: '원' }
+                    { title: '거래 유형', value: tradeType === 'spot' ? '현물' : tradeType === 'futures' ? '선물' : '마진', unit: '' }
                 ]
             };
         }
@@ -786,41 +1017,47 @@
             const finalPrice = parseFloat(data.finalPrice);
             
             const totalInvested = monthlyAmount * period;
-            const totalQuantity = totalInvested / ((initialPrice + finalPrice) / 2); // 평균 매수가 가정
-            const currentValue = totalQuantity * finalPrice;
-            const profit = currentValue - totalInvested;
+            const totalQuantity = totalInvested / initialPrice; // 단순화된 계산
+            const finalValue = totalQuantity * finalPrice;
+            const profit = finalValue - totalInvested;
+            const returnRate = (profit / totalInvested) * 100;
             
             return {
                 main: {
-                    title: 'DCA 수익',
+                    title: 'DCA 최종 수익',
                     value: profit.toLocaleString(),
                     unit: '원',
                     isProfit: profit > 0
                 },
                 details: [
-                    { title: '총 투자금', value: totalInvested.toLocaleString(), unit: '원' },
-                    { title: '현재 가치', value: currentValue.toLocaleString(), unit: '원' },
-                    { title: '수익률', value: ((profit / totalInvested) * 100).toFixed(2), unit: '%' }
+                    { title: '총 투자금액', value: totalInvested.toLocaleString(), unit: '원' },
+                    { title: '최종 평가금액', value: finalValue.toLocaleString(), unit: '원' },
+                    { title: '총 수익률', value: returnRate.toFixed(2), unit: '%' },
+                    { title: '투자 기간', value: period, unit: '개월' }
                 ]
             };
         }
 
         // 청산가 계산
-        function calculateLiquidation(data) {
+        function calculateLiquidationPrice(data) {
             const entryPrice = parseFloat(data.entryPrice);
-            const leverage = data.leverage === 'custom' ? parseFloat(data.customLeverage) : parseFloat(data.leverage);
+            let leverage = parseFloat(data.leverage);
             const position = data.position;
             const maintenanceMargin = parseFloat(data.maintenanceMargin) / 100;
             
-            let liquidationPrice;
-            if (position === 'long') {
-                liquidationPrice = entryPrice * (1 - (1 / leverage) + maintenanceMargin);
-            } else {
-                liquidationPrice = entryPrice * (1 + (1 / leverage) - maintenanceMargin);
+            if (data.leverage === 'custom' && data.customLeverage) {
+                leverage = parseFloat(data.customLeverage);
             }
             
-            const riskAmount = Math.abs(entryPrice - liquidationPrice);
-            const riskPercentage = (riskAmount / entryPrice) * 100;
+            let liquidationPrice;
+            if (position === 'long') {
+                liquidationPrice = entryPrice - (entryPrice / leverage) + (entryPrice * maintenanceMargin);
+            } else {
+                liquidationPrice = entryPrice + (entryPrice / leverage) - (entryPrice * maintenanceMargin);
+            }
+            
+            const riskAmount = entryPrice / leverage;
+            const riskPercent = (riskAmount / entryPrice) * 100;
             
             return {
                 main: {
@@ -830,8 +1067,9 @@
                 },
                 details: [
                     { title: '진입가', value: entryPrice.toLocaleString(), unit: '원' },
-                    { title: '레버리지', value: leverage + 'x', unit: '' },
-                    { title: '위험 거리', value: riskPercentage.toFixed(2), unit: '%' }
+                    { title: '레버리지', value: leverage, unit: 'x' },
+                    { title: '포지션', value: position === 'long' ? '롱 (Long)' : '숏 (Short)', unit: '' },
+                    { title: '리스크 금액', value: riskAmount.toLocaleString(), unit: '원' }
                 ]
             };
         }
@@ -850,14 +1088,15 @@
             
             return {
                 main: {
-                    title: '포지션 사이즈',
+                    title: '적정 포지션 크기',
                     value: positionSize.toFixed(4),
                     unit: '개'
                 },
                 details: [
                     { title: '포지션 가치', value: positionValue.toLocaleString(), unit: '원' },
                     { title: '리스크 금액', value: riskAmount.toLocaleString(), unit: '원' },
-                    { title: '가격 리스크', value: priceRisk.toLocaleString(), unit: '원' }
+                    { title: '가격 리스크', value: priceRisk.toLocaleString(), unit: '원' },
+                    { title: '리스크 비율', value: data.riskPercent, unit: '%' }
                 ]
             };
         }
@@ -873,19 +1112,20 @@
             const return3 = parseFloat(data.return3) / 100;
             
             const expectedReturn = (prob1 * return1) + (prob2 * return2) + (prob3 * return3);
-            const expectedProfit = investment * expectedReturn;
+            const expectedValue = investment * (1 + expectedReturn);
+            const expectedProfit = expectedValue - investment;
             
             return {
                 main: {
                     title: '기대 수익률',
                     value: (expectedReturn * 100).toFixed(2),
-                    unit: '%',
-                    isProfit: expectedReturn > 0
+                    unit: '%'
                 },
                 details: [
-                    { title: '기대 수익', value: expectedProfit.toLocaleString(), unit: '원' },
                     { title: '투자 금액', value: investment.toLocaleString(), unit: '원' },
-                    { title: '확률 합계', value: ((prob1 + prob2 + prob3) * 100).toFixed(1), unit: '%' }
+                    { title: '기대 가치', value: expectedValue.toLocaleString(), unit: '원' },
+                    { title: '기대 수익', value: expectedProfit.toLocaleString(), unit: '원' },
+                    { title: '확률 총합', value: ((prob1 + prob2 + prob3) * 100).toFixed(0), unit: '%' }
                 ]
             };
         }
@@ -894,19 +1134,23 @@
         function calculateBridgeFee(data) {
             const amount = parseFloat(data.amount);
             const bridgeFee = parseFloat(data.bridgeFee) / 100;
-            const fee = amount * bridgeFee;
-            const receivedAmount = amount - fee;
+            const fromChain = data.fromChain;
+            const toChain = data.toChain;
+            
+            const feeAmount = amount * bridgeFee;
+            const receiveAmount = amount - feeAmount;
             
             return {
                 main: {
                     title: '브릿지 수수료',
-                    value: fee.toFixed(6),
-                    unit: 'Token'
+                    value: feeAmount.toFixed(6),
+                    unit: 'TOKEN'
                 },
                 details: [
-                    { title: '전송 금액', value: amount.toLocaleString(), unit: 'Token' },
-                    { title: '수신 금액', value: receivedAmount.toFixed(6), unit: 'Token' },
-                    { title: '수수료율', value: data.bridgeFee, unit: '%' }
+                    { title: '브릿지 금액', value: amount.toLocaleString(), unit: 'TOKEN' },
+                    { title: '받을 금액', value: receiveAmount.toFixed(6), unit: 'TOKEN' },
+                    { title: '출발 체인', value: fromChain, unit: '' },
+                    { title: '도착 체인', value: toChain, unit: '' }
                 ]
             };
         }
@@ -918,20 +1162,21 @@
             const exchangeRate = parseFloat(data.exchangeRate);
             
             const foreignPriceKRW = foreignPrice * exchangeRate;
-            const kimchiPremium = domesticPrice - foreignPriceKRW;
-            const kimchiPremiumPercent = (kimchiPremium / foreignPriceKRW) * 100;
+            const premium = domesticPrice - foreignPriceKRW;
+            const premiumPercent = (premium / foreignPriceKRW) * 100;
             
             return {
                 main: {
                     title: '김치 프리미엄',
-                    value: kimchiPremiumPercent.toFixed(2),
+                    value: premiumPercent.toFixed(2),
                     unit: '%',
-                    isProfit: kimchiPremium > 0
+                    isProfit: premiumPercent > 0
                 },
                 details: [
-                    { title: '국내가 (원화)', value: domesticPrice.toLocaleString(), unit: '원' },
-                    { title: '해외가 (원화)', value: foreignPriceKRW.toLocaleString(), unit: '원' },
-                    { title: '프리미엄 (원화)', value: kimchiPremium.toLocaleString(), unit: '원' }
+                    { title: '국내 가격', value: domesticPrice.toLocaleString(), unit: '원' },
+                    { title: '해외 가격 (원화)', value: foreignPriceKRW.toLocaleString(), unit: '원' },
+                    { title: '가격 차이', value: premium.toLocaleString(), unit: '원' },
+                    { title: '환율', value: exchangeRate.toLocaleString(), unit: '원/달러' }
                 ]
             };
         }
@@ -941,23 +1186,24 @@
             const high = parseFloat(data.high);
             const low = parseFloat(data.low);
             const currentPrice = parseFloat(data.currentPrice);
-            const retracement = parseFloat(data.retracement) / 100;
+            const retracement = parseFloat(data.retracement);
             
             const range = high - low;
-            const retracementLevel = high - (range * retracement);
-            const distanceFromEntry = Math.abs(currentPrice - retracementLevel);
-            const distancePercent = (distanceFromEntry / currentPrice) * 100;
+            const retracementLevel = high - (range * retracement / 100);
+            const supportLevel = low + (range * 0.236); // 23.6% 지지선
+            const resistanceLevel = high - (range * 0.236); // 23.6% 저항선
             
             return {
                 main: {
-                    title: '진입점',
+                    title: `${retracement}% 되돌림 레벨`,
                     value: retracementLevel.toLocaleString(),
                     unit: '원'
                 },
                 details: [
                     { title: '현재가', value: currentPrice.toLocaleString(), unit: '원' },
-                    { title: '진입점까지 거리', value: distancePercent.toFixed(2), unit: '%' },
-                    { title: '되돌림 비율', value: data.retracement, unit: '%' }
+                    { title: '지지선 (23.6%)', value: supportLevel.toLocaleString(), unit: '원' },
+                    { title: '저항선 (23.6%)', value: resistanceLevel.toLocaleString(), unit: '원' },
+                    { title: '가격 범위', value: range.toLocaleString(), unit: '원' }
                 ]
             };
         }
@@ -970,19 +1216,21 @@
             const monthlyContribution = parseFloat(data.monthlyContribution) || 0;
             
             const totalContribution = monthlyContribution * 12 * timeframe;
-            const requiredGrowth = targetAsset - currentAsset - totalContribution;
-            const requiredRate = Math.pow(targetAsset / (currentAsset + totalContribution), 1 / timeframe) - 1;
+            const assetGrowthNeeded = targetAsset - currentAsset - totalContribution;
+            const requiredReturn = assetGrowthNeeded > 0 ? 
+                Math.pow(assetGrowthNeeded / currentAsset, 1 / timeframe) - 1 : 0;
             
             return {
                 main: {
                     title: '필요 연수익률',
-                    value: (requiredRate * 100).toFixed(2),
+                    value: (requiredReturn * 100).toFixed(2),
                     unit: '%'
                 },
                 details: [
                     { title: '현재 자산', value: currentAsset.toLocaleString(), unit: '원' },
                     { title: '목표 자산', value: targetAsset.toLocaleString(), unit: '원' },
-                    { title: '추가 투자금', value: totalContribution.toLocaleString(), unit: '원' }
+                    { title: '총 추가 투자금', value: totalContribution.toLocaleString(), unit: '원' },
+                    { title: '목표 기간', value: timeframe, unit: '년' }
                 ]
             };
         }
@@ -994,8 +1242,9 @@
             const holdingPeriod = parseFloat(data.holdingPeriod);
             const fundingInterval = parseFloat(data.fundingInterval);
             
-            const fundingCount = Math.floor(holdingPeriod / fundingInterval);
-            const totalFundingFee = positionSize * fundingRate * fundingCount;
+            const fundingTimes = Math.floor(holdingPeriod / fundingInterval);
+            const totalFundingFee = positionSize * fundingRate * fundingTimes;
+            const dailyFundingFee = totalFundingFee * (24 / holdingPeriod);
             
             return {
                 main: {
@@ -1005,8 +1254,9 @@
                 },
                 details: [
                     { title: '포지션 크기', value: positionSize.toLocaleString(), unit: '원' },
-                    { title: '펀딩 횟수', value: fundingCount, unit: '회' },
-                    { title: '회당 펀딩비', value: (positionSize * fundingRate).toLocaleString(), unit: '원' }
+                    { title: '펀딩 비율', value: data.fundingRate, unit: '%' },
+                    { title: '펀딩 횟수', value: fundingTimes, unit: '회' },
+                    { title: '일일 펀딩비', value: dailyFundingFee.toLocaleString(), unit: '원' }
                 ]
             };
         }
