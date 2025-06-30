@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://coinbanana.netlify.app/sitemap.xml
