@@ -217,8 +217,44 @@
                 </div>
             </div>
 
-            <!-- Calculator Form -->
-            <div id="calculator-form" class="hidden">
+                <!-- 글로벌 거래소 배너 -->
+                <div class="mt-16 max-w-4xl mx-auto">
+                    <div class="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 border border-emerald-200 dark:border-emerald-800 rounded-2xl p-8 shadow-lg">
+                        <div class="text-center">
+                            <h3 class="text-2xl font-bold text-emerald-800 dark:text-emerald-200 mb-4">
+                                <i class="fas fa-trophy mr-3 text-yellow-600"></i>
+                                글로벌 TOP 6 거래소 공식 파트너 할인 혜택
+                            </h3>
+                            <p class="text-emerald-700 dark:text-emerald-300 mb-4 leading-relaxed text-lg">
+                                바이비트, 바이낸스, OKX, 비트겟, 빙엑스, 게이트아이오 등<br />
+                                전 세계 상위 거래소의 공식 파트너 링크를 통해<br />
+                                <strong class="text-xl">최대 50% 수수료 할인 혜택</strong>을 받을 수 있습니다.
+                            </p>
+                            <p class="text-sm text-emerald-600 dark:text-emerald-400 mb-6">
+                                가입만 해도 자동 적용되며, 평생 할인 혜택이 유지됩니다.<br />
+                                고수익 트레이더들이 선택한 할인 방식, 지금 바로 확인하세요.
+                            </p>
+                            <a href="https://cobana.netlify.app/" target="_blank" rel="noopener noreferrer"
+                               class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-lg rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                                <i class="fas fa-external-link-alt mr-3"></i>
+                                공식 파트너 할인 혜택 받기
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Calculator Form (독립적인 전체화면) -->
+        <div id="calculator-form" class="hidden fixed inset-0 bg-gray-50 dark:bg-gray-900 overflow-auto z-40">
+            <!-- Theme Toggle -->
+            <div class="fixed top-4 right-4 z-50">
+                <button id="theme-toggle-calc" class="p-2 rounded-lg bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 transition-colors shadow-lg touch-friendly backdrop-blur-sm border border-gray-200 dark:border-gray-700">
+                    <i id="theme-icon-calc" class="fas fa-moon text-gray-700 dark:text-white"></i>
+                </button>
+            </div>
+
+            <div class="container mx-auto px-4 py-8">
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
                     <div class="flex items-center justify-between mb-6">
                         <h2 id="calculator-title" class="text-2xl font-bold text-gray-900 dark:text-white"></h2>
@@ -265,6 +301,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </main>
 
             <!-- Footer -->
@@ -567,27 +604,47 @@
 
         // 이벤트 리스너 설정
         function setupEventListeners() {
-            // 테마 토글
-            document.getElementById('theme-toggle').addEventListener('click', function() {
+            // 테마 토글 함수
+            function toggleTheme() {
                 isDarkMode = !isDarkMode;
                 const themeIcon = document.getElementById('theme-icon');
+                const themeIconCalc = document.getElementById('theme-icon-calc');
                 
                 if (isDarkMode) {
                     document.documentElement.classList.add('dark');
-                    themeIcon.className = 'fas fa-sun text-gray-700 dark:text-white';
+                    const iconClass = 'fas fa-sun text-gray-700 dark:text-white';
+                    themeIcon.className = iconClass;
+                    if (themeIconCalc) themeIconCalc.className = iconClass;
                     localStorage.setItem('theme', 'dark');
                 } else {
                     document.documentElement.classList.remove('dark');
-                    themeIcon.className = 'fas fa-moon text-gray-700 dark:text-white';
+                    const iconClass = 'fas fa-moon text-gray-700 dark:text-white';
+                    themeIcon.className = iconClass;
+                    if (themeIconCalc) themeIconCalc.className = iconClass;
                     localStorage.setItem('theme', 'light');
                 }
-            });
+            }
+
+            // 테마 토글 버튼들
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+            document.getElementById('theme-toggle-calc').addEventListener('click', toggleTheme);
 
             // 뒤로가기 버튼
             document.getElementById('back-btn').addEventListener('click', showCalculatorList);
 
             // 폼 제출
             document.getElementById('calc-form').addEventListener('submit', handleFormSubmit);
+
+            // 갤럭시폰 뒤로가기 버튼 처리
+            window.addEventListener('popstate', function(event) {
+                if (event.state && event.state.page === 'home') {
+                    showCalculatorList();
+                } else if (currentCalculator && (!event.state || event.state.page === 'calculator')) {
+                    showCalculatorList();
+                } else if (!event.state) {
+                    showCalculatorList();
+                }
+            });
         }
 
         // 계산기 목록 렌더링
@@ -654,23 +711,47 @@
 
         // 계산기 목록 표시
         function showCalculatorList() {
-            document.getElementById('calculator-list').classList.remove('hidden');
+            // 홈 화면 다시 보이기
+            document.querySelector('main').style.display = 'block';
             document.getElementById('calculator-form').classList.add('hidden');
+            document.getElementById('calculator-form').style.display = 'none';
             currentCalculator = null;
+            
+            // 히스토리 상태 업데이트
+            window.history.pushState({ page: 'home' }, '', '/');
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // 계산기 표시
         function showCalculator(calculator) {
             currentCalculator = calculator;
-            document.getElementById('calculator-list').classList.add('hidden');
+            
+            // 홈 화면 완전히 숨기기
+            document.querySelector('main').style.display = 'none';
             document.getElementById('calculator-form').classList.remove('hidden');
+            document.getElementById('calculator-form').style.display = 'block';
             document.getElementById('calculator-title').textContent = calculator.title;
+            
+            // 계산기 화면의 테마 아이콘 동기화
+            syncThemeIcons();
+            
+            // 히스토리 상태 추가 (갤럭시폰 뒤로가기 처리)
+            window.history.pushState({ page: 'calculator', calculatorId: calculator.id }, '', '#' + calculator.id);
             
             renderFormFields(calculator.fields);
             document.getElementById('result-area').classList.add('hidden');
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 테마 아이콘 동기화
+        function syncThemeIcons() {
+            const mainIcon = document.getElementById('theme-icon');
+            const calcIcon = document.getElementById('theme-icon-calc');
+            if (mainIcon && calcIcon) {
+                calcIcon.className = mainIcon.className;
+            }
         }
 
         // 폼 필드 렌더링
